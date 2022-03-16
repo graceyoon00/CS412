@@ -3,9 +3,14 @@
 
 const express = require("express");
 const path = require("path");
+const router = express.Router();
+module.exports = router;
 
 const app = express();
 const port = process.env.PORT || "3000";
+
+var indexRouter = require('./ps3');
+app.use('/', indexRouter);
 
 /* app config */
 
@@ -16,23 +21,23 @@ app.use(express.static(path.join(__dirname, "public")));
 /* ROUTES */
 
 /* for home page */
-app.get("/", function(req, res, next) {
+router.get("/", function(req, res, next) {
   res.render("index", { title: "WOOHOO" });
 });
 
 /* GET method, returns fixed string */
-app.get("/justString", function(req, res, next) {
+router.get("/justString", function(req, res, next) {
   res.render("index", { string: "Flight of the seabirds, scattered like lost words, wheel to the storm and fly"});
 });
 
 /* POST method, param from req body */
-app.post('/postString', function(req, res, next) {
+router.post('/postString', function(req, res, next) {
   const ret = req.body.name;
   res.render('index', { string: ret, length: ret.length });
 });
 
 /* GET with named value on URL */
-app.get('/linkString/:string', function(req, res, next) {
+router.get('/linkString/:string', function(req, res, next) {
   res.render("index", { string: req.params.string, length: req.params.string.length });
 });
 
