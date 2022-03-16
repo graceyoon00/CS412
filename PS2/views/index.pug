@@ -1,0 +1,15 @@
+extends layout
+
+block layout-content
+
+  // title
+  if title
+    h1 The title: #{title}
+  else
+    h1 Welcome
+
+  // string parts
+  if string
+    h3 The string is #{string} / Its length: #{length}
+  else
+    h3 jelly babies
